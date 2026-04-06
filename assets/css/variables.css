@@ -1,0 +1,29 @@
+:root {
+    --bg: #f3f8f7;
+    --bg-accent: #e5f6f4;
+    --surface: rgba(255, 255, 255, 0.86);
+    --surface-solid: #ffffff;
+    --surface-soft: #f7fbfa;
+    --surface-strong: #0f2f35;
+    --text: #17373b;
+    --muted: #5d7a7d;
+    --line: rgba(23, 55, 59, 0.12);
+    --accent: #0fbbb2;
+    --accent-dark: #0a8780;
+    --accent-soft: #daf8f5;
+    --accent-warm: #ff9e7a;
+    --danger: #d35b5b;
+    --warning: #f2a54a;
+    --success: #2f9c74;
+    --shadow-lg: 0 32px 80px rgba(13, 65, 70, 0.14);
+    --shadow-md: 0 18px 40px rgba(13, 65, 70, 0.1);
+    --shadow-sm: 0 10px 24px rgba(13, 65, 70, 0.08);
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+    --radius-md: 18px;
+    --radius-sm: 12px;
+    --container: 1180px;
+    --font-body: "Segoe UI Variable Text", "Trebuchet MS", sans-serif;
+    --font-heading: "Segoe UI Variable Display", "Bahnschrift", "Trebuchet MS", sans-serif;
+    --transition: 180ms ease;
+}

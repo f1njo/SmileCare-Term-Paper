@@ -1,0 +1,314 @@
+.hero-section,
+.dashboard-hero,
+.appointments-hero {
+    position: relative;
+    padding: 72px 0 34px;
+}
+
+.hero-grid,
+.dashboard-hero__grid,
+.appointments-hero__grid,
+.feature-grid,
+.auth-layout {
+    display: grid;
+    gap: 24px;
+}
+
+.hero-grid,
+.dashboard-hero__grid,
+.appointments-hero__grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(320px, 0.8fr);
+    align-items: center;
+}
+
+.hero-copy {
+    max-width: 680px;
+}
+
+.hero-actions,
+.hero-stats,
+.auth-benefits,
+.appointments-hero__stats {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.hero-actions {
+    margin-top: 28px;
+}
+
+.hero-stats {
+    margin-top: 30px;
+}
+
+.hero-card {
+    position: relative;
+    padding: 28px;
+    border-radius: 36px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(236, 253, 250, 0.84)),
+        var(--surface);
+    border: 1px solid rgba(255, 255, 255, 0.78);
+    box-shadow: var(--shadow-lg);
+}
+
+.hero-card::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -40px;
+    right: -30px;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(15, 187, 178, 0.28), transparent 68%);
+    pointer-events: none;
+}
+
+.hero-card__panel {
+    padding: 22px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-card__panel--accent {
+    margin-top: 16px;
+    background: linear-gradient(135deg, rgba(15, 187, 178, 0.16), rgba(255, 158, 122, 0.18));
+}
+
+.hero-card__panel p,
+.hero-card__panel span {
+    color: var(--muted);
+}
+
+.hero-card__panel strong {
+    display: block;
+    margin: 6px 0;
+    font-size: 1.4rem;
+}
+
+.hero-card__list {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.hero-card__list div {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(23, 55, 59, 0.08);
+}
+
+.hero-card__list div:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+}
+
+.feature-grid {
+    grid-template-columns: 1.15fr 0.85fr;
+}
+
+.cta-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 34px;
+    border-radius: 32px;
+    background: linear-gradient(135deg, rgba(15, 187, 178, 0.12), rgba(255, 158, 122, 0.16));
+    box-shadow: var(--shadow-md);
+}
+
+.contacts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.contact-card--map {
+    min-height: 280px;
+}
+
+.auth-main {
+    padding: 56px 0 0;
+}
+
+.auth-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(360px, 480px);
+    align-items: stretch;
+}
+
+.auth-aside {
+    padding: 34px;
+}
+
+.auth-card {
+    padding: 34px;
+    border-radius: 32px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: var(--shadow-lg);
+}
+
+.auth-switch {
+    display: inline-flex;
+    gap: 8px;
+    padding: 6px;
+    margin-bottom: 26px;
+    border-radius: 999px;
+    background: rgba(15, 187, 178, 0.08);
+}
+
+.auth-switch__link {
+    padding: 12px 18px;
+    border-radius: 999px;
+    color: var(--muted);
+    font-weight: 700;
+}
+
+.auth-switch__link.is-active {
+    background: white;
+    color: var(--text);
+    box-shadow: var(--shadow-sm);
+}
+
+.dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.dashboard-hero__cards,
+.appointments-hero__stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.appointments-layout {
+    grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+    align-items: start;
+}
+
+.next-appointment {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.appointment-form-card,
+.appointment-list-card {
+    position: sticky;
+    top: 112px;
+}
+
+.appointment-list-card {
+    position: static;
+}
+
+@media (max-width: 1080px) {
+    .hero-grid,
+    .dashboard-hero__grid,
+    .appointments-hero__grid,
+    .cards-grid--services,
+    .cards-grid--doctors,
+    .pricing-grid,
+    .contacts-grid,
+    .dashboard-grid,
+    .appointments-layout,
+    .feature-grid,
+    .auth-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .appointment-form-card {
+        position: static;
+    }
+}
+
+@media (max-width: 840px) {
+    .site-nav,
+    .header-actions {
+        display: none;
+    }
+
+    .site-nav.is-open,
+    .header-actions.is-open {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        display: grid;
+        gap: 10px;
+        padding: 18px;
+        background: rgba(255, 255, 255, 0.96);
+        border-radius: 24px;
+        box-shadow: var(--shadow-lg);
+    }
+
+    .site-nav.is-open {
+        top: 88px;
+    }
+
+    .header-actions.is-open {
+        top: 286px;
+    }
+
+    .nav-toggle {
+        display: block;
+    }
+
+    .section-block {
+        padding: 72px 0;
+    }
+
+    .section-heading,
+    .panel-card__header,
+    .appointment-card__top,
+    .appointment-card__actions,
+    .cta-banner,
+    .footer-shell,
+    .footer-bottom__inner {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .dashboard-hero__cards,
+    .appointments-hero__stats,
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 640px) {
+    .container {
+        width: min(var(--container), calc(100% - 20px));
+    }
+
+    .hero-section,
+    .dashboard-hero,
+    .appointments-hero {
+        padding-top: 42px;
+    }
+
+    .hero-card,
+    .auth-card,
+    .panel-card,
+    .service-card,
+    .doctor-card,
+    .pricing-card,
+    .feature-card,
+    .review-card,
+    .contact-card {
+        padding: 22px;
+        border-radius: 24px;
+    }
+
+    .toast-stack {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+    }
+
+    .toast {
+        min-width: 0;
+        max-width: none;
+    }
+}
