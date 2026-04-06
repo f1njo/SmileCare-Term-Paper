@@ -5,6 +5,30 @@
     padding: 72px 0 34px;
 }
 
+.hero-section::before,
+.hero-section::after {
+    content: "";
+    position: absolute;
+    border-radius: 999px;
+    pointer-events: none;
+}
+
+.hero-section::before {
+    width: 340px;
+    height: 340px;
+    top: -80px;
+    right: 7%;
+    background: radial-gradient(circle, rgba(121, 199, 255, 0.18), transparent 68%);
+}
+
+.hero-section::after {
+    width: 260px;
+    height: 260px;
+    left: -40px;
+    bottom: 10px;
+    background: radial-gradient(circle, rgba(15, 187, 178, 0.16), transparent 72%);
+}
+
 .hero-grid,
 .dashboard-hero__grid,
 .appointments-hero__grid,
@@ -23,6 +47,10 @@
 
 .hero-copy {
     max-width: 680px;
+}
+
+.section-block--compact {
+    padding: 28px 0 24px;
 }
 
 .hero-actions,
@@ -53,6 +81,15 @@
     box-shadow: var(--shadow-lg);
 }
 
+.hero-card::before {
+    content: "";
+    position: absolute;
+    inset: 12px;
+    border-radius: 28px;
+    border: 1px solid rgba(255, 255, 255, 0.56);
+    pointer-events: none;
+}
+
 .hero-card::after {
     content: "";
     position: absolute;
@@ -63,6 +100,33 @@
     border-radius: 999px;
     background: radial-gradient(circle, rgba(15, 187, 178, 0.28), transparent 68%);
     pointer-events: none;
+}
+
+.hero-card__badge {
+    display: inline-grid;
+    gap: 4px;
+    margin-bottom: 18px;
+    padding: 16px 18px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.72);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-card__badge span {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.hero-card__badge strong {
+    font-size: 1.1rem;
+}
+
+.hero-card__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 16px;
 }
 
 .hero-card__panel {
@@ -88,13 +152,43 @@
     font-size: 1.4rem;
 }
 
-.hero-card__list {
+.hero-card__showcase {
     display: grid;
-    gap: 14px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 16px;
     margin-top: 18px;
 }
 
-.hero-card__list div {
+.hero-showcase__card {
+    padding: 22px;
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: var(--shadow-sm);
+}
+
+.hero-showcase__card--dark {
+    background: linear-gradient(160deg, #17373b, #0f2f35);
+    color: white;
+}
+
+.hero-showcase__card--dark span {
+    color: rgba(255, 255, 255, 0.72);
+}
+
+.hero-showcase__eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.hero-showcase__list {
+    display: grid;
+    gap: 14px;
+}
+
+.hero-showcase__list li {
     display: flex;
     justify-content: space-between;
     gap: 18px;
@@ -102,13 +196,30 @@
     border-bottom: 1px solid rgba(23, 55, 59, 0.08);
 }
 
-.hero-card__list div:last-child {
+.hero-showcase__list li:last-child {
     padding-bottom: 0;
     border-bottom: 0;
 }
 
+.hero-showcase__list strong {
+    font-size: 0.9rem;
+    color: var(--text);
+}
+
+.hero-showcase__card--dark strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.32rem;
+}
+
 .feature-grid {
     grid-template-columns: 1.15fr 0.85fr;
+}
+
+.care-route {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .cta-banner {
@@ -215,7 +326,14 @@
     .dashboard-grid,
     .appointments-layout,
     .feature-grid,
+    .trust-ribbon,
+    .care-route,
     .auth-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card__grid,
+    .hero-card__showcase {
         grid-template-columns: 1fr;
     }
 
@@ -310,5 +428,17 @@
     .toast {
         min-width: 0;
         max-width: none;
+    }
+
+    .hero-trustline,
+    .service-card__tags,
+    .hero-actions,
+    .hero-stats {
+        gap: 10px;
+    }
+
+    .hero-card__badge,
+    .hero-note {
+        padding: 16px;
     }
 }
