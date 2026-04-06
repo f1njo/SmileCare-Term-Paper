@@ -1,2 +1,0 @@
-# SmileCare Term Paper
-
