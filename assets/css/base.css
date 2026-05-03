@@ -1,11 +1,6 @@
 body {
     font-family: var(--font-body);
-    background:
-        radial-gradient(circle at top left, rgba(15, 187, 178, 0.16), transparent 34%),
-        radial-gradient(circle at 85% 12%, rgba(121, 199, 255, 0.18), transparent 24%),
-        radial-gradient(circle at bottom right, rgba(255, 158, 122, 0.18), transparent 28%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.56), rgba(243, 248, 247, 0.94)),
-        var(--bg);
+    background: var(--bg);
     color: var(--text);
     line-height: 1.6;
 }
@@ -28,19 +23,15 @@ main {
 }
 
 .section-block {
-    padding: 96px 0;
+    padding: 88px 0;
 }
 
 .section-block--muted {
-    background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.3)),
-        rgba(255, 255, 255, 0.45);
+    background: linear-gradient(180deg, #ffffff 0%, var(--bg-accent) 100%);
 }
 
 .section-block--gradient {
-    background:
-        radial-gradient(circle at 10% 10%, rgba(15, 187, 178, 0.08), transparent 28%),
-        linear-gradient(180deg, rgba(218, 248, 245, 0.55), rgba(255, 255, 255, 0));
+    background: linear-gradient(180deg, var(--bg-accent), rgba(255, 255, 255, 0));
 }
 
 .section-block--accent {
@@ -51,7 +42,7 @@ main {
     margin-bottom: 12px;
     font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent-dark);
 }
@@ -61,16 +52,16 @@ h2,
 h3,
 h4 {
     font-family: var(--font-heading);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
+    line-height: 1.1;
+    letter-spacing: 0;
 }
 
 h1 {
-    font-size: clamp(2.9rem, 5vw, 5.2rem);
+    font-size: clamp(2.35rem, 4.8vw, 4.7rem);
 }
 
 h2 {
-    font-size: clamp(2rem, 3vw, 3.2rem);
+    font-size: clamp(1.85rem, 3vw, 3rem);
 }
 
 h3 {
@@ -140,7 +131,7 @@ textarea,
 select {
     width: 100%;
     border: 1px solid var(--line);
-    border-radius: 18px;
+    border-radius: var(--radius-md);
     padding: 16px 18px;
     background: var(--surface-solid);
     color: var(--text);
@@ -156,8 +147,8 @@ input:focus,
 textarea:focus,
 select:focus {
     outline: none;
-    border-color: rgba(15, 187, 178, 0.62);
-    box-shadow: 0 0 0 5px rgba(15, 187, 178, 0.12);
+    border-color: rgba(47, 143, 232, 0.62);
+    box-shadow: 0 0 0 5px rgba(47, 143, 232, 0.12);
 }
 
 .field-error {
@@ -174,10 +165,10 @@ select:focus {
 
 .empty-state {
     padding: 36px;
-    border: 1px dashed rgba(15, 187, 178, 0.28);
+    border: 1px dashed rgba(47, 143, 232, 0.28);
     border-radius: var(--radius-lg);
     text-align: center;
-    background: rgba(255, 255, 255, 0.54);
+    background: rgba(255, 255, 255, 0.78);
 }
 
 .is-hidden,

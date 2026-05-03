@@ -2,7 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupNavigation();
     setupSmoothAnchors();
     setupFaq();
-    setupReviewSlider();
     setupToasts();
 });
 
@@ -78,38 +77,6 @@ function setupFaq() {
             }
         });
     });
-}
-
-function setupReviewSlider() {
-    const slider = document.querySelector('[data-review-slider]');
-    if (!slider) {
-        return;
-    }
-
-    const slides = Array.from(slider.querySelectorAll('[data-review-slide]'));
-    const prevButton = slider.querySelector('[data-review-nav="prev"]');
-    const nextButton = slider.querySelector('[data-review-nav="next"]');
-
-    if (slides.length <= 1 || !prevButton || !nextButton) {
-        return;
-    }
-
-    let index = slides.findIndex((slide) => slide.classList.contains('is-active'));
-    if (index < 0) {
-        index = 0;
-        slides[0].classList.add('is-active');
-    }
-
-    const showSlide = (nextIndex) => {
-        slides[index].classList.remove('is-active');
-        index = (nextIndex + slides.length) % slides.length;
-        slides[index].classList.add('is-active');
-    };
-
-    prevButton.addEventListener('click', () => showSlide(index - 1));
-    nextButton.addEventListener('click', () => showSlide(index + 1));
-
-    window.setInterval(() => showSlide(index + 1), 6500);
 }
 
 function setupToasts() {
