@@ -85,8 +85,8 @@ function validate_appointment_input(array $input): array
         $errors['appointment_date'] = 'Укажите корректную дату.';
     }
 
-    if (!preg_match('/^\d{2}:\d{2}$/', $appointmentTime)) {
-        $errors['appointment_time'] = 'Укажите время в формате ЧЧ:ММ.';
+    if (!in_array($appointmentTime, appointment_time_slots(), true)) {
+        $errors['appointment_time'] = 'Выберите целый час приёма с 08:00 до 20:00.';
     }
 
     if ($comment !== '' && mb_strlen($comment) > 500) {

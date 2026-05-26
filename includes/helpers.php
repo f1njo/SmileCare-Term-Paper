@@ -49,35 +49,42 @@ function pull_flash(): ?array
 
 function clinic_services(): array
 {
-    return [
-        'Профилактический осмотр',
-        'Лечение кариеса',
-        'Профессиональная гигиена',
-        'Эстетическая реставрация',
-        'Отбеливание ZOOM',
-        'Имплантация',
-        'Детская стоматология',
-    ];
+    $stmt = db()->query('SELECT name FROM services ORDER BY id');
+    $services = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return array_map('strval', $services ?: []);
 }
 
 function clinic_doctors(): array
 {
-    return [
-        'Анна Воронцова',
-        'Илья Мельников',
-        'Марина Жданова',
-        'Ольга Ковалева',
-    ];
+    $stmt = db()->query(
+        'SELECT u.name
+         FROM doctors d
+         JOIN users u ON u.id = d.user_id
+         ORDER BY d.id'
+    );
+    $doctors = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return array_map('strval', $doctors ?: []);
 }
 
 function appointment_statuses(): array
 {
-    return [
-        'Ожидает подтверждения',
-        'Подтверждена',
-        'Завершена',
-        'Отменена',
-    ];
+    $stmt = db()->query('SELECT name FROM appointment_statuses ORDER BY id');
+    $statuses = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+    return array_map('strval', $statuses ?: []);
+}
+
+function appointment_time_slots(): array
+{
+    $slots = [];
+
+    for ($hour = 8; $hour < 21; $hour++) {
+        $slots[] = sprintf('%02d:00', $hour);
+    }
+
+    return $slots;
 }
 
 function format_currency(int $amount): string
@@ -94,6 +101,10 @@ function format_date_ru(string $date): string
 
 function format_time_ru(string $time): string
 {
+    if (preg_match('/^\d{2}:\d{2}:\d{2}$/', $time)) {
+        return substr($time, 0, 5);
+    }
+
     return preg_match('/^\d{2}:\d{2}$/', $time) ? $time : $time;
 }
 

@@ -11,6 +11,11 @@ function current_user_id(): ?int
     return isset($_SESSION['user']['id']) ? (int) $_SESSION['user']['id'] : null;
 }
 
+function current_user_role(): string
+{
+    return (string) ($_SESSION['user']['role'] ?? '');
+}
+
 function is_authenticated(): bool
 {
     return current_user_id() !== null;
@@ -21,6 +26,8 @@ function login_user(array $user): void
     session_regenerate_id(true);
     $_SESSION['user'] = [
         'id' => (int) $user['id'],
+        'role_id' => (int) ($user['role_id'] ?? 0),
+        'role' => (string) ($user['role'] ?? ''),
         'name' => (string) $user['name'],
         'email' => (string) $user['email'],
         'created_at' => (string) ($user['created_at'] ?? ''),
@@ -48,6 +55,25 @@ function require_auth_api(): void
     }
 }
 
+function require_admin_page(): void
+{
+    require_auth_page();
+
+    if (current_user_role() !== 'admin') {
+        set_flash('warning', 'Этот раздел доступен только администратору.');
+        redirect_to('dashboard.php');
+    }
+}
+
+function require_admin_api(): void
+{
+    require_auth_api();
+
+    if (current_user_role() !== 'admin') {
+        json_error('Действие доступно только администратору.', 403);
+    }
+}
+
 function csrf_token(): string
 {
     if (empty($_SESSION['csrf_token'])) {
@@ -69,52 +95,76 @@ function ensure_csrf_token(array $input): void
 
 function all_users(): array
 {
-    return read_json_storage(USERS_FILE);
-}
+    $stmt = db()->query(
+        'SELECT u.id, u.role_id, r.name AS role, u.name, u.email, u.password_hash, u.created_at
+         FROM users u
+         JOIN roles r ON r.id = u.role_id
+         ORDER BY u.id'
+    );
 
-function save_users(array $users): bool
-{
-    return write_json_storage(USERS_FILE, $users);
+    return $stmt->fetchAll();
 }
 
 function find_user_by_email(string $email): ?array
 {
-    foreach (all_users() as $user) {
-        if (($user['email'] ?? '') === $email) {
-            return $user;
-        }
-    }
+    $stmt = db()->prepare(
+        'SELECT u.id, u.role_id, r.name AS role, u.name, u.email, u.password_hash, u.created_at
+         FROM users u
+         JOIN roles r ON r.id = u.role_id
+         WHERE u.email = :email
+         LIMIT 1'
+    );
+    $stmt->execute(['email' => $email]);
+    $user = $stmt->fetch();
 
-    return null;
+    return $user ?: null;
 }
 
 function find_user_by_id(int $id): ?array
 {
-    foreach (all_users() as $user) {
-        if ((int) ($user['id'] ?? 0) === $id) {
-            return $user;
-        }
-    }
+    $stmt = db()->prepare(
+        'SELECT u.id, u.role_id, r.name AS role, u.name, u.email, u.password_hash, u.created_at
+         FROM users u
+         JOIN roles r ON r.id = u.role_id
+         WHERE u.id = :id
+         LIMIT 1'
+    );
+    $stmt->execute(['id' => $id]);
+    $user = $stmt->fetch();
 
-    return null;
+    return $user ?: null;
+}
+
+function role_id_by_name(string $roleName): ?int
+{
+    $stmt = db()->prepare('SELECT id FROM roles WHERE name = :name LIMIT 1');
+    $stmt->execute(['name' => $roleName]);
+    $id = $stmt->fetchColumn();
+
+    return $id !== false ? (int) $id : null;
 }
 
 function create_user(string $name, string $email, string $password): ?array
 {
-    $users = all_users();
-    $users[] = [
-        'id' => next_storage_id($users),
+    $roleId = role_id_by_name('patient') ?? 1;
+
+    $stmt = db()->prepare(
+        'INSERT INTO users (role_id, name, email, password_hash)
+         VALUES (:role_id, :name, :email, :password_hash)'
+    );
+
+    $saved = $stmt->execute([
+        'role_id' => $roleId,
         'name' => $name,
         'email' => $email,
         'password_hash' => password_hash($password, PASSWORD_DEFAULT),
-        'created_at' => date(DATE_ATOM),
-    ];
+    ]);
 
-    if (!save_users($users)) {
+    if (!$saved) {
         return null;
     }
 
-    return $users[array_key_last($users)] ?? null;
+    return find_user_by_id((int) db()->lastInsertId());
 }
 
 function refresh_session_user(): void
@@ -129,6 +179,8 @@ function refresh_session_user(): void
         return;
     }
 
+    $_SESSION['user']['role_id'] = (int) ($user['role_id'] ?? 0);
+    $_SESSION['user']['role'] = (string) ($user['role'] ?? '');
     $_SESSION['user']['name'] = (string) $user['name'];
     $_SESSION['user']['email'] = (string) $user['email'];
     $_SESSION['user']['created_at'] = (string) ($user['created_at'] ?? '');

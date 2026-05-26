@@ -273,8 +273,10 @@ function validateAppointmentForm(formData) {
         errors.appointment_date = 'Укажите дату.';
     }
 
-    if (!String(formData.get('appointment_time') || '').trim()) {
-        errors.appointment_time = 'Укажите время.';
+    const appointmentTime = String(formData.get('appointment_time') || '').trim();
+    const validSlots = Array.from({ length: 13 }, (_, index) => `${String(index + 8).padStart(2, '0')}:00`);
+    if (!validSlots.includes(appointmentTime)) {
+        errors.appointment_time = 'Выберите целый час приёма с 08:00 до 20:00.';
     }
 
     const comment = String(formData.get('comment') || '').trim();

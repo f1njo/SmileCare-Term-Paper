@@ -48,8 +48,12 @@ $user = current_user();
             <div class="header-actions">
                 <?php if ($user !== null): ?>
                     <span class="user-pill"><?= e($user['name']) ?></span>
-                    <a href="dashboard.php" class="button button--ghost">Кабинет</a>
-                    <a href="appointments.php" class="button button--primary">Записи</a>
+                    <?php if (current_user_role() === 'admin'): ?>
+                        <a href="admin.php" class="button button--primary">Администрирование</a>
+                    <?php else: ?>
+                        <a href="dashboard.php" class="button button--ghost">Кабинет</a>
+                        <a href="appointments.php" class="button button--primary">Записи</a>
+                    <?php endif; ?>
                     <a href="logout.php" class="button button--ghost">Выйти</a>
                 <?php else: ?>
                     <a href="login.php" class="button button--ghost">Войти</a>

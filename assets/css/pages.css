@@ -213,7 +213,8 @@
 }
 
 .dashboard-hero__cards,
-.appointments-hero__stats {
+.appointments-hero__stats,
+.admin-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
@@ -238,6 +239,34 @@
 
 .appointment-list-card {
     position: static;
+}
+
+.admin-main .dashboard-hero__grid {
+    align-items: start;
+}
+
+.admin-list-card {
+    max-width: 980px;
+}
+
+.admin-note {
+    color: var(--muted);
+}
+
+.admin-appointments-list {
+    display: grid;
+    gap: 18px;
+}
+
+.admin-status-form {
+    display: flex;
+    align-items: end;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-status-form .field {
+    flex: 1 1 250px;
 }
 
 @media (max-width: 1080px) {
@@ -319,6 +348,7 @@
 
     .dashboard-hero__cards,
     .appointments-hero__stats,
+    .admin-stats,
     .form-grid {
         grid-template-columns: 1fr;
     }

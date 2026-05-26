@@ -25,5 +25,5 @@ if ($user === null || !password_verify($values['password'], (string) ($user['pas
 login_user($user);
 
 json_success('Вход выполнен.', [
-    'redirect' => 'dashboard.php',
+    'redirect' => current_user_role() === 'admin' ? 'admin.php' : 'dashboard.php',
 ]);

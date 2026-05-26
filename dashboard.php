@@ -5,6 +5,10 @@ require_once __DIR__ . '/includes/bootstrap.php';
 
 require_auth_page();
 
+if (current_user_role() === 'admin') {
+    redirect_to('admin.php');
+}
+
 $user = current_user();
 $appointments = appointments_for_user((int) $user['id']);
 $totalAppointments = count($appointments);

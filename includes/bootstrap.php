@@ -16,16 +16,12 @@ if (session_status() === PHP_SESSION_NONE) {
 define('APP_NAME', 'SmileCare');
 define('ROOT_PATH', dirname(__DIR__));
 define('DATA_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'data');
-define('USERS_FILE', DATA_PATH . DIRECTORY_SEPARATOR . 'users.json');
-define('APPOINTMENTS_FILE', DATA_PATH . DIRECTORY_SEPARATOR . 'appointments.json');
 
+require_once __DIR__ . '/db.php';
 require_once __DIR__ . '/helpers.php';
-require_once __DIR__ . '/json_storage.php';
 require_once __DIR__ . '/validators.php';
 require_once __DIR__ . '/response.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/appointments.php';
 
-ensure_storage_file(USERS_FILE);
-ensure_storage_file(APPOINTMENTS_FILE);
 refresh_session_user();

@@ -1,34 +1,107 @@
-# SmileCare Term Paper
+# SmileCare
 
-Сайт стоматологической клиники SmileCare.
+Веб-приложение стоматологической клиники, разработанное в рамках курсовой работы.
 
-Стек: HTML + CSS + JavaScript + PHP + AJAX + JSON.
+## Используемые технологии
 
-## Запуск через XAMPP
+### Backend
+- PHP
+- MySQL
+- PDO
 
-1. Скопируйте проект в папку:
+### Frontend
+- HTML
+- CSS
+- JavaScript
+- AJAX (Fetch API)
 
-C:\xampp\htdocs\smilecare
+## Возможности
 
-2. Откройте XAMPP Control Panel.
-3. Запустите Apache.
-4. Откройте сайт в браузере:
+### Пациент
+- Регистрация
+- Авторизация
+- Запись на приём
+- Просмотр своих записей
+- Редактирование записей
+- Удаление записей
 
-http://localhost/smilecare/index.php
+### Врач
+- Просмотр назначенных записей
+- Просмотр информации о пациенте
+- Изменение статуса приёма
 
-5. Если Apache работает на другом порту, например 8080, используйте:
+### Администратор
+- Просмотр всех данных системы
+- Управление пользователями
+- Управление врачами
+- Управление услугами
 
-http://localhost:8080/smilecare/index.php
+## Структура проекта
+SmileCare-Term-Paper-main/
+│── api/
+│── assets/
+│── includes/
+│── database/
+│──── smilecare_db.sql
+│── index.php
+│── login.php
+│── register.php
+│── dashboard.php
+│── appointments.php
+│── logout.php
+└── README.md
 
-## Основные страницы
+## Настройка базы данных
 
-- index.php — landing page клиники
-- login.php — вход
-- register.php — регистрация
-- dashboard.php — личный кабинет
-- appointments.php — управление записями на приём
+1. Открыть MySQL Workbench
+2. Перейти:
+Server → Data Import
 
-## Данные
+3. Выбрать:
+Import from Self-Contained File
 
-- data/users.json — пользователи
-- data/appointments.json — записи на приём
+4. Указать файл:
+database/smilecare_db.sql
+
+5. Выбрать базу данных:
+smilecare_db
+
+6. Нажать:
+Start Import
+
+## Настройка подключения
+
+Файл подключения:
+includes/db.php
+
+Проверить настройки:
+$host = 'localhost';
+$dbname = 'smilecare_db';
+$user = 'root';
+$password = '';
+
+## Тестовые аккаунты
+
+Пароль для всех аккаунтов:
+TEST
+
+### Администратор
+admin@smilecare.ru
+
+### Врачи
+vorontsova@smilecare.ru
+melnikov@smilecare.ru
+zhdanova@smilecare.ru
+kovaleva@smilecare.ru
+
+### Пациенты
+ivan@gmail.com
+maria@gmail.com
+
+## Безопасность
+
+- Хеширование паролей (`password_hash`)
+- Проверка пароля (`password_verify`)
+- PDO prepared statements
+- Сессии PHP
+- Разграничение доступа по ролям

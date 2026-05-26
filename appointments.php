@@ -5,6 +5,10 @@ require_once __DIR__ . '/includes/bootstrap.php';
 
 require_auth_page();
 
+if (current_user_role() === 'admin') {
+    redirect_to('admin.php');
+}
+
 $user = current_user();
 $appointments = appointments_for_user((int) $user['id']);
 $presentedAppointments = array_map('present_appointment', $appointments);
@@ -91,7 +95,13 @@ include __DIR__ . '/includes/header.php';
 
                         <label class="field">
                             <span>Время</span>
-                            <input type="time" name="appointment_time" required>
+                            <select name="appointment_time" required>
+                                <option value="">Выберите время</option>
+                                <?php foreach (appointment_time_slots() as $slot): ?>
+                                    <option value="<?= e($slot) ?>"><?= e($slot) ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <small>Приём ведётся ежедневно с 08:00 до 21:00, длительность слота - 1 час.</small>
                             <small class="field-error" data-error-for="appointment_time"></small>
                         </label>
                     </div>
